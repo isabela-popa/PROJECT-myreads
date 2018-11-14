@@ -15,9 +15,9 @@ class ListBooks extends React.Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <BookShelf bookShelfTitle="Currently Reading" currentBooks={this.props.currentBooks} />
-                        <BookShelf bookShelfTitle="Want to Read" currentBooks={this.props.currentBooks} />
-                        <BookShelf bookShelfTitle="Read" currentBooks={this.props.currentBooks} />
+                        <BookShelf bookShelfTitle="Currently Reading" currentBookShelf='currentlyReading' currentBooks={this.props.currentBooks} />
+                        <BookShelf bookShelfTitle="Want to Read" currentBookShelf='wantToRead' currentBooks={this.props.currentBooks} />
+                        <BookShelf bookShelfTitle="Read" currentBookShelf='read' currentBooks={this.props.currentBooks} />
                     </div>
                 </div>
                 <div className="open-search">

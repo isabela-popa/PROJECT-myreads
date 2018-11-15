@@ -11,11 +11,11 @@ class BookShelf extends React.Component {
                 <h2 className="bookshelf-title">{this.props.bookShelfTitle}</h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
-                        {this.props.currentBooks.filter(currentBook =>
-                            currentBook.shelf === this.props.currentBookShelf
-                        ).map(currentBook => (
-                            <li key={currentBook.id} >
-                                <Book currentBook={currentBook} />
+                        {this.props.bookshelfBooks.filter(bookshelfBook =>
+                            bookshelfBook.shelf === this.props.currentBookShelf
+                        ).map(bookshelfBook => (
+                            <li key={bookshelfBook.id} >
+                                <Book book={bookshelfBook} />
                             </li>
                         ))}
                     </ol>

@@ -22,10 +22,10 @@ class BooksApp extends React.Component {
         return (
             <div className="app">
                 <Route path='/search' render={() => (
-                    <SearchBooks />
+                    <SearchBooks  />
                 )} />
                 <Route exact path='/' render={() => (
-                    <ListBooks currentBooks={this.state.currentBooks} />
+                    <ListBooks listedBooks={this.state.currentBooks} />
                 )} />
             </div>
         )

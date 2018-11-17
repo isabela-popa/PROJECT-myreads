@@ -14,7 +14,13 @@ class SearchBooks extends React.Component {
 
     updateFilteredBooks = searchText => {
         if (searchText) {
-            BooksAPI.search(searchText).then(filteredBooks => this.setState({ filteredBooks }));
+            BooksAPI.search(searchText).then(filteredBooks => {
+                if (filteredBooks.error) {
+                    this.setState({ filteredBooks: [] });
+                } else {
+                    this.setState({ filteredBooks });
+                }
+            })
         } else {
             this.setState({ filteredBooks: [] });
         }

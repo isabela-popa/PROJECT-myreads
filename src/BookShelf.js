@@ -15,7 +15,10 @@ class BookShelf extends React.Component {
                             bookshelfBook.shelf === this.props.currentBookShelf
                         ).map(bookshelfBook => (
                             <li key={bookshelfBook.id} >
-                                <Book book={bookshelfBook} />
+                                <Book
+                                    book={bookshelfBook}
+                                    onChangeBookShelf={(book, shelf) => { this.props.onChangeBookShelf(book, shelf) }}
+                                />
                             </li>
                         ))}
                     </ol>

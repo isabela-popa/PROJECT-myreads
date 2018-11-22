@@ -54,14 +54,21 @@ class SearchBooks extends React.Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {this.state.filteredBooks.map(filteredBook => (
-                            <li key={filteredBook.id} >
-                                <Book
-                                    book={filteredBook}
-                                    onChangeBookShelf={(book, shelf) => { this.props.onChangeBookShelf(book, shelf) }}
-                                />
-                            </li>
-                        ))}
+                        {this.state.filteredBooks.map(filteredBook => {
+                            let bookShelfValue;
+                            this.props.currentBooks.map(currentBook => (
+                                currentBook.id === filteredBook.id ? bookShelfValue = currentBook.shelf : ''
+                            ));
+                            return (
+                                <li key={filteredBook.id} >
+                                    <Book
+                                        book={filteredBook}
+                                        onChangeBookShelf={(book, shelf) => { this.props.onChangeBookShelf(book, shelf) }}
+                                        currentBookShelf={bookShelfValue}
+                                    />
+                                </li>
+                            );
+                        })}
                     </ol>
                 </div>
             </div>

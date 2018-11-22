@@ -11,29 +11,34 @@ class BooksApp extends React.Component {
         currentBooks: []
     }
 
-    componentDidMount() {
+    getCurrentBooks() {
         BooksAPI.getAll().then(currentBooks => {
-            this.setState({ currentBooks })
-        })
+            this.setState({ currentBooks });
+        });
+    }
+
+    componentDidMount() {
+        this.getCurrentBooks();
     }
 
     changeBookShelf(book, shelf) {
         BooksAPI.update(book, shelf).then(() => {
+            book.shelf = shelf;
+            // this.getCurrentBooks();
             this.setState(state => ({
-                currentBooks: state.currentBooks.filter(currentBook => currentBook.id !== book.id)
-                // .concat([book])
-                // currentBooks: [...state.currentBooks.filter(currentBook => currentBook.id !== book.id), book]
+                // currentBooks: state.currentBooks.filter(currentBook => currentBook.id !== book.id).concat([book])
+                currentBooks: [...state.currentBooks.filter(currentBook => currentBook.id !== book.id), book]
             }))
-        })
+        });
     }
 
     render() {
-        console.log(this.state.currentBooks);
+        // console.log(this.state.currentBooks);
         return (
             <div className="app">
                 <Route path='/search' render={() => (
                     <SearchBooks
-                        searchedBooks={this.state.currentBooks}
+                        currentBooks={this.state.currentBooks}
                         onChangeBookShelf={(book, shelf) => { this.changeBookShelf(book, shelf) }}
                     />
                 )} />

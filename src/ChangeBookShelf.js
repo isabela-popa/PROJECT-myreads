@@ -9,7 +9,7 @@ class ChangeBookShelf extends React.Component {
 
             <div className="book-shelf-changer">
                 <select
-                    value={this.props.book.shelf || "none"}
+                    value={this.props.currentBookShelf || "none"}
                     onChange={(event) => this.props.onChangeBookShelf(this.props.book, event.target.value)}
                 >
                     <option value="move" disabled>Move to...</option>

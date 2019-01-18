@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Book from './Book';
 import * as BooksAPI from './BooksAPI';
+import { DebounceInput } from 'react-debounce-input';
 
 class SearchBooks extends React.Component {
 
@@ -10,9 +11,12 @@ class SearchBooks extends React.Component {
         filteredBooks: []
     }
 
-    updateSearchText = searchText => this.setState({ searchText })
+    updateSearchText = searchText => {
+        this.setState({ searchText });
+        this.updateFilteredBooks(searchText);
+    }
 
-    updateFilteredBooks = searchText => {
+    updateFilteredBooks(searchText) {
         if (searchText) {
             BooksAPI.search(searchText).then(filteredBooks => {
                 if (filteredBooks.error) {
@@ -26,13 +30,13 @@ class SearchBooks extends React.Component {
         }
     }
 
-    searchBooks = searchText => {
-        this.updateSearchText(searchText);
-        this.updateFilteredBooks(searchText);
+    // Prevent the code of trying to change state after component unmounted
+    componentWillUnmount() {
+        this.updateSearchText('');
     }
 
     render() {
-
+        // console.log(this.state.filteredBooks);
         return (
 
             <div className="search-books">
@@ -41,17 +45,18 @@ class SearchBooks extends React.Component {
                         className="close-search"
                         to="/"
                     >Close</Link>
-                    <div className="search-books-input-wrapper">
 
-                        <input
+                    <div className="search-books-input-wrapper">
+                        <DebounceInput
                             type="text"
                             placeholder="Search by title or author"
                             value={this.state.searchText}
-                            onChange={(event) => this.searchBooks(event.target.value)}
+                            onChange={(event) => this.updateSearchText(event.target.value)}
+                            debounceTimeout={400}
                         />
-
                     </div>
                 </div>
+
                 <div className="search-books-results">
                     <ol className="books-grid">
                         {this.state.filteredBooks.map(filteredBook => {
@@ -59,6 +64,7 @@ class SearchBooks extends React.Component {
                             this.props.currentBooks.map(currentBook => (
                                 currentBook.id === filteredBook.id ? bookShelfValue = currentBook.shelf : ''
                             ));
+
                             return (
                                 <li key={filteredBook.id} >
                                     <Book

@@ -11,16 +11,21 @@ class BooksApp extends React.Component {
         currentBooks: []
     }
 
+    // Use BooksAPI to fetch remote books
     getCurrentBooks() {
         BooksAPI.getAll().then(currentBooks => {
             this.setState({ currentBooks });
         });
     }
 
+    // Wait until the component mounts, in order to populate the currentBooks array
     componentDidMount() {
         this.getCurrentBooks();
     }
 
+    // Select a new bookshelf for a book,
+    // take out the book with the old bookshelf from the currentBooks array and
+    // add back the book with the new shelf
     changeBookShelf(book, shelf) {
         BooksAPI.update(book, shelf).then(() => {
             book.shelf = shelf;

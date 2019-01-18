@@ -25,7 +25,6 @@ function ChangeBookShelf (props) {
 }
 
 ChangeBookShelf.propTypes = {
-    currentBookShelf: PropTypes.string.isRequired,
     onChangeBookShelf: PropTypes.func.isRequired
 };
 

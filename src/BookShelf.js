@@ -12,6 +12,7 @@ function BookShelf (props) {
             <h2 className="bookshelf-title">{bookShelfTitle}</h2>
             <div className="bookshelf-books">
                 <ol className="books-grid">
+                    {/* List each book on the correct shelf */}
                     {bookshelfBooks.filter(bookshelfBook =>
                         bookshelfBook.shelf === currentBookShelf
                     ).map(bookshelfBook => (

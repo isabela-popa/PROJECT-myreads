@@ -13,6 +13,7 @@ function Book (props) {
                 <div className="book-cover" style={{
                     width: 128,
                     height: 193,
+                    /* Handle missing book thumbnail */
                     backgroundImage: `url(${book.imageLinks ? book.imageLinks.thumbnail : ''})`
                 }}>
                 </div>
@@ -23,6 +24,7 @@ function Book (props) {
                 />
             </div>
             <div className="book-title">{book.title}</div>
+            {/* Handle missing book author */}
             <div className="book-authors">{book.authors ? book.authors.join(', ') : ''}</div>
         </div>
 
@@ -31,7 +33,6 @@ function Book (props) {
 }
 
 Book.propTypes = {
-    currentBookShelf: PropTypes.string.isRequired,
     onChangeBookShelf: PropTypes.func.isRequired
 };
 

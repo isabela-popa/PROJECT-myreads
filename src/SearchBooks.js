@@ -36,7 +36,9 @@ class SearchBooks extends React.Component {
     }
 
     render() {
-        // console.log(this.state.filteredBooks);
+        const { searchText, filteredBooks } = this.state;
+        const { currentBooks, onChangeBookShelf } = this.props;
+        // console.log(filteredBooks);
         return (
 
             <div className="search-books">
@@ -50,7 +52,7 @@ class SearchBooks extends React.Component {
                         <DebounceInput
                             type="text"
                             placeholder="Search by title or author"
-                            value={this.state.searchText}
+                            value={searchText}
                             onChange={(event) => this.updateSearchText(event.target.value)}
                             debounceTimeout={400}
                         />
@@ -59,9 +61,9 @@ class SearchBooks extends React.Component {
 
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {this.state.filteredBooks.map(filteredBook => {
+                        {filteredBooks.map(filteredBook => {
                             let bookShelfValue;
-                            this.props.currentBooks.map(currentBook => (
+                            currentBooks.map(currentBook => (
                                 currentBook.id === filteredBook.id ? bookShelfValue = currentBook.shelf : ''
                             ));
 
@@ -69,7 +71,7 @@ class SearchBooks extends React.Component {
                                 <li key={filteredBook.id} >
                                     <Book
                                         book={filteredBook}
-                                        onChangeBookShelf={(book, shelf) => { this.props.onChangeBookShelf(book, shelf) }}
+                                        onChangeBookShelf={(book, shelf) => { onChangeBookShelf(book, shelf) }}
                                         currentBookShelf={bookShelfValue}
                                     />
                                 </li>

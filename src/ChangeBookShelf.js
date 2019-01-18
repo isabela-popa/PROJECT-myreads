@@ -3,13 +3,14 @@ import React from 'react';
 
 
 function ChangeBookShelf (props) {
+    const { currentBookShelf, onChangeBookShelf, book } = props;
 
     return (
 
         <div className="book-shelf-changer">
             <select
-                value={props.currentBookShelf || "none"}
-                onChange={(event) => props.onChangeBookShelf(props.book, event.target.value)}
+                value={currentBookShelf || "none"}
+                onChange={(event) => onChangeBookShelf(book, event.target.value)}
             >
                 <option value="move" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>

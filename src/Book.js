@@ -3,6 +3,7 @@ import ChangeBookShelf from './ChangeBookShelf';
 
 
 function Book (props) {
+    const { onChangeBookShelf, book, currentBookShelf } = props;
 
     return (
 
@@ -11,17 +12,17 @@ function Book (props) {
                 <div className="book-cover" style={{
                     width: 128,
                     height: 193,
-                    backgroundImage: `url(${props.book.imageLinks ? props.book.imageLinks.thumbnail : ''})`
+                    backgroundImage: `url(${book.imageLinks ? book.imageLinks.thumbnail : ''})`
                 }}>
                 </div>
                 <ChangeBookShelf
-                    onChangeBookShelf={(book, shelf) => { props.onChangeBookShelf(book, shelf) }}
-                    book={props.book}
-                    currentBookShelf={props.currentBookShelf}
+                    onChangeBookShelf={(book, shelf) => { onChangeBookShelf(book, shelf) }}
+                    book={book}
+                    currentBookShelf={currentBookShelf}
                 />
             </div>
-            <div className="book-title">{props.book.title}</div>
-            <div className="book-authors">{props.book.authors ? props.book.authors.join(', ') : ''}</div>
+            <div className="book-title">{book.title}</div>
+            <div className="book-authors">{book.authors ? book.authors.join(', ') : ''}</div>
         </div>
 
     )

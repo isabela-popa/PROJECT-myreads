@@ -4,7 +4,8 @@ import BookShelf from './BookShelf';
 
 
 
-function ListBooks (props) {
+function ListBooks(props) {
+    const { listedBooks, onChangeBookShelf } = props;
 
     return (
 
@@ -17,20 +18,20 @@ function ListBooks (props) {
                     <BookShelf
                         bookShelfTitle="Currently Reading"
                         currentBookShelf='currentlyReading'
-                        bookshelfBooks={props.listedBooks}
-                        onChangeBookShelf={(book, shelf) => { props.onChangeBookShelf(book, shelf) }}
+                        bookshelfBooks={listedBooks}
+                        onChangeBookShelf={(book, shelf) => { onChangeBookShelf(book, shelf) }}
                     />
                     <BookShelf
                         bookShelfTitle="Want to Read"
                         currentBookShelf='wantToRead'
-                        bookshelfBooks={props.listedBooks}
-                        onChangeBookShelf={(book, shelf) => { props.onChangeBookShelf(book, shelf) }}
+                        bookshelfBooks={listedBooks}
+                        onChangeBookShelf={(book, shelf) => { onChangeBookShelf(book, shelf) }}
                     />
                     <BookShelf
                         bookShelfTitle="Read"
                         currentBookShelf='read'
-                        bookshelfBooks={props.listedBooks}
-                        onChangeBookShelf={(book, shelf) => { props.onChangeBookShelf(book, shelf) }}
+                        bookshelfBooks={listedBooks}
+                        onChangeBookShelf={(book, shelf) => { onChangeBookShelf(book, shelf) }}
                     />
                 </div>
             </div>

@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom';
 import Book from './Book';
 import * as BooksAPI from './BooksAPI';
 import { DebounceInput } from 'react-debounce-input';
+import PropTypes from 'prop-types';
 
 class SearchBooks extends React.Component {
+    static propTypes = {
+        currentBooks: PropTypes.array.isRequired,
+        onChangeBookShelf: PropTypes.func.isRequired
+    }
 
     state = {
         searchText: '',
